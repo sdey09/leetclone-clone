@@ -5,3 +5,6 @@ pluginManagement {
 	}
 }
 rootProject.name = 'leetcode'
+
+include 'code-publisher'
+include 'code-executor'
