@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:21-jdk
 
 # Create non-root system user safely
 RUN groupadd -r coderunner && \
