@@ -45,12 +45,14 @@ public class DockerExecutorService {
         response.setSuccess(true);
 
         List<ExecutionResponse.TestCaseResult> results = new ArrayList<>();
+
+        // Test cases are passed by the request
         for(ExecutionRequest.TestCase testCase : request.getTestCases()){
             ExecutionResponse.TestCaseResult result = executeTestCase(
                     strategy,
-                    request.getCode(),
+                    request.getCode(), // Get the code in plain text
                     testCase,
-                    request.getTimeoutSeconds()
+                    request.getTimeoutSeconds() // The time of the corresponding code
             );
             results.add(result);
             if(!result.isPassed()) response.setSuccess(false);
@@ -89,6 +91,8 @@ public class DockerExecutorService {
 
             // exit code 0: stderr (compiler notes, warnings) is ignored, only stdout is compared
             String actualOutput = execResult.stdOut().trim();
+
+            // Get the output and match with the expected output
             result.setActualOutput(actualOutput);
             boolean passed = actualOutput.equals(testCase.getExpectedOutput().trim());
             result.setPassed(passed);
